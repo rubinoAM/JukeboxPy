@@ -1,4 +1,5 @@
 from record import *
+import os
 
 class Jukebox(object):
     def __init__(self):
@@ -112,12 +113,80 @@ class Jukebox(object):
             if record in row:
                 row.pop(record)
     
-    def look_up_record(self,record):
-        query = raw_input("Please enter a string to search by")
-        if query == 1:
-            pass
-        if query == 2:
-            pass
+    def look_up_record(self):
+        os.system("clear")
+        print("What criteria would you like to use in your search?")
+        print("Please select from the following:")
+        query = input("1.Artist\n2.Year\n3.Genre\nEnter: ")
+        check_count = 0
+
+        if query == "1":
+            print("Please enter the first letter you wish to search by:")
+            search_key = input("Enter: ")
+            os.system("clear")
+            print("Search Results:\n")
+            for key1, val1 in self.inventory.items():
+                for array in val1:
+                    column_no = str(val1.index(array) + 1)
+                    array_ordered = array.items()
+                    for key2, val2 in array_ordered:
+                        if key2 == "artist":
+                            if search_key == val2[0]:
+                                print("Record " + key1 + column_no + "-----------------------------")
+                                for key3, val3 in array_ordered:
+                                    print(key3.upper() + ": " + str(val3))
+                                    check_count += 1
+                                print("\n")
+            if check_count == 0:
+                print ("No records were found using that string.")
+        elif query == "2":
+            print("Please enter the year you wish to search by:")
+            search_key = input("Enter: ")
+            os.system("clear")
+            print("Search Results:\n")
+            for key1, val1 in self.inventory.items():
+                for array in val1:
+                    column_no = str(val1.index(array) + 1)
+                    array_ordered = array.items()
+                    for key2, val2 in array_ordered:
+                        if key2 == "year":
+                            if search_key == str(val2):
+                                print("Record " + key1 + column_no + "-----------------------------")
+                                for key3, val3 in array_ordered:
+                                    print(key3.upper() + ": " + str(val3))
+                                    check_count += 1
+                                print("\n")
+            if check_count == 0:
+                print ("No records were found from that year.")
+        elif query == "3":
+            print("Please enter the string you wish to search by:")
+            search_key = input("Enter: ")
+            os.system("clear")
+            print("Search Results:\n")
+            for key1, val1 in self.inventory.items():
+                for array in val1:
+                    column_no = str(val1.index(array) + 1)
+                    array_ordered = array.items()
+                    for key2, val2 in array_ordered:
+                        if key2 == "genre":
+                            if search_key in val2:
+                                print("Record " + key1 + column_no + "-----------------------------")
+                                for key3, val3 in array_ordered:
+                                    print(key3.upper() + ": " + str(val3))
+                                    check_count += 1
+                                print("\n")
+            if check_count == 0:
+                print ("No records were found using that string.")
+        check_count = 0
+
+
 
     def list_all_records(self):
-        pass
+        for key1, val1 in self.inventory.items():
+            for array in val1:
+                column_no = str(val1.index(array) + 1)
+                print("Record " + key1 + column_no + "-----------------------------")
+                array_ordered = array.items()
+                array_ordered.sort()
+                for key2, val2 in array_ordered:
+                    print(key2.upper() + ": " + str(val2))
