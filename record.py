@@ -1,12 +1,11 @@
-rec_att = ["artist","aside","bside","year","genre"]
-
+# -*- coding: utf-8 -*-
 class Record(object):
-    def __init__(self,rec_att):
-        self.artist = rec_att[0]
-        self.aside = rec_att[1]
-        self.bside = rec_att[2]
-        self.year = rec_att[3]
-        self.genre = rec_att[4]
+    def __init__(self,artist,aside,bside,year,genre):
+        self.artist = artist
+        self.aside = aside
+        self.bside = bside
+        self.year = year
+        self.genre = genre
        
 """
 Records to be added:
