@@ -1,4 +1,5 @@
 from record import *
+import random
 import os
 
 main_menu = True
@@ -144,20 +145,29 @@ class Jukebox(object):
 
     def play_record(self):
         os.system("clear")
+        play_lines=[
+            "\"Ain't it funky now?!\"",
+            "\"Get on up! Get into it!! Get involved!!!\"",
+            "\"Give the drummer some!!\"",
+            "\"Pick up on this!!\"",
+            "\"Have mercy on me!!\"",
+            "\"Get up off of that thing!\nDance until you feel better!!\"",
+            "\"You've got the flavor!!\""
+        ]
         row_sel = input("Please select a row (Type a capital letter from A to J): ")
         col_sel = int(input("Please select a column (Type a number from 1 to 8): "))
         side_sel = input("Which side do you want to play? The A-side or B-side? (Type A or B): ")
         record_sel = self.inventory[row_sel][(col_sel - 1)]
 
         if side_sel == "A":
-            print ("\nYou played %s by %s!" % (record_sel["aside"],record_sel["artist"]))
-            print ("\"Ain't it funky now?!\"")
+            print ("\nYou played %s by %s!\nYou proceed to dance!" % (record_sel["aside"],record_sel["artist"]))
+            print (play_lines[random.randint(0,7)])
             input("Press any key to return to the main menu.")
             os.system("clear")
             main_menu = True
         elif side_sel == "B":
-            print ("\nYou played %s by %s!" % (record_sel["bside"],record_sel["artist"]))
-            print ("\"Get on up! Get into it!! Get involved!!!\"")
+            print ("\nYou played %s by %s!\nYou proceed to dance!" % (record_sel["bside"],record_sel["artist"]))
+            print (play_lines[random.randint(0,7)])
             input("Press any key to return to the main menu.")
             os.system("clear")
             main_menu = True
