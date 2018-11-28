@@ -1,6 +1,8 @@
 from record import *
 import os
 
+main_menu = True
+
 class Jukebox(object):
     def __init__(self):
         self.inventory = {
@@ -27,7 +29,8 @@ class Jukebox(object):
             self.inventory[row_num][col_num]['genre'] = record.genre
         else:
             print ("I'm sorry, but this slot is currently taken.")
-    def initialize_box(self):
+
+    def initialize_box(self): #tuple that takes certain argument?
         self.init_add(a_1,"A",0)
         self.init_add(a_2,"A",1)
         self.init_add(a_3,"A",2)
@@ -108,11 +111,85 @@ class Jukebox(object):
         self.init_add(j_6,"J",5)
         self.init_add(j_7,"J",6)
         self.init_add(j_8,"J",7)
-    def del_record(self,record):
-        for row in self.inventory:
-            if record in row:
-                row.pop(record)
-    
+
+    def start_up(self):
+        print("-----------------------Welcome to Mom & Pop's Jukebox!-----------------------\n")
+        print("Please select one of the following options.")
+        print("To play a record, type 1.")
+        print("To add a record, type 2.")
+        print("To delete a record, type 3.")
+        print("To look up a record, type 4.")
+        print("To list all the records, type 5.")
+        print("To exit, type 6.")
+        decision = input("Type here: ")
+
+        if decision == "1":
+            main_menu = False
+            self.play_record()
+        if decision == "2":
+            main_menu = False
+            self.add_record()
+        if decision == "3":
+            main_menu = False
+            self.del_record()
+        if decision == "4":
+            main_menu = False
+            self.look_up_record()
+        if decision == "5":
+            main_menu = False
+            self.list_all_records()
+        if decision == "6":
+            print("Goodbye!")
+            os._exit(-1)
+
+    def play_record(self):
+        os.system("clear")
+        row_sel = input("Please select a row (Type a capital letter from A to J): ")
+        col_sel = int(input("Please select a column (Type a number from 1 to 8): "))
+        side_sel = input("Which side do you want to play? The A-Side or B-Side? (Type A or B): ")
+        record_sel = self.inventory[row_sel][(col_sel - 1)]
+
+        if side_sel == "A":
+            print ("\nYou played %s by %s!" % (record_sel["aside"],record_sel["artist"]))
+            print ("\"Ain't it funky now?!\"")
+            main_menu = True
+        elif side_sel == "B":
+            print ("\nYou played %s by %s!" % (record_sel["bside"],record_sel["artist"]))
+            print ("\"Get on up! Get into it!! Get involved!!!\"")
+            main_menu = True
+
+    def add_record(self):
+        os.system("clear")
+        row_num = input("Please select a row (Type a capital letter from A to J): ")
+        col_num = int(input("Please select a column (Type a number from 1 to 8): "))
+        possible_rows = ["A","B","C","D","E","F","G","H","I","J"]
+
+        if (not self.inventory[row_num][col_num]):
+            main_menu = True
+        elif (row_num not in possible_rows or col_num not in range(1,9)):
+            print ("I'm sorry, but this is not an actual slot in the machine.")
+            main_menu = True
+        else:
+            print ("I'm sorry, but this slot is currently taken.")
+            main_menu = True
+
+    def del_record(self):
+        os.system("clear")
+        row_num = input("Please select a row (Type a capital letter from A to J): ")
+        col_num = int(input("Please select a column (Type a number from 1 to 8): "))
+        possible_rows = ["A","B","C","D","E","F","G","H","I","J"]
+
+        if (self.inventory[row_num][col_num]):
+            self.inventory[row_num][col_num].clear()
+            print ("Slot %s%s is now empty. Thank you." % (row_num,col_num))
+            main_menu = True
+        elif (row_num not in possible_rows or col_num not in range(1,9)):
+            print ("I'm sorry, but this is not an actual slot in the machine.")
+            main_menu = True
+        else:
+            print ("I'm sorry, but this slot is already empty.")
+            main_menu = True
+
     def look_up_record(self):
         os.system("clear")
         print("What criteria would you like to use in your search?")
@@ -178,6 +255,7 @@ class Jukebox(object):
             if check_count == 0:
                 print ("No records were found using that string.")
         check_count = 0
+        main_menu = True
 
     def list_all_records(self):
         for key1, val1 in self.inventory.items():
@@ -188,3 +266,4 @@ class Jukebox(object):
                 array_ordered.sort()
                 for key2, val2 in array_ordered:
                     print(key2.upper() + ": " + str(val2))
+        main_menu = True
