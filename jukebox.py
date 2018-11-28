@@ -152,10 +152,14 @@ class Jukebox(object):
         if side_sel == "A":
             print ("\nYou played %s by %s!" % (record_sel["aside"],record_sel["artist"]))
             print ("\"Ain't it funky now?!\"")
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
         elif side_sel == "B":
             print ("\nYou played %s by %s!" % (record_sel["bside"],record_sel["artist"]))
             print ("\"Get on up! Get into it!! Get involved!!!\"")
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
 
     def add_record(self):
@@ -178,12 +182,18 @@ class Jukebox(object):
             self.inventory[row_num][col_num-1]['genre'] = genre_inp
 
             print ("%s / %s by %s has been added to slot %s%s. Thank you" % (aside_inp,bside_inp,artist_inp,row_num,col_num))
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
         elif (row_num not in possible_rows or col_num not in range(1,9)):
             print ("I'm sorry, but this is not an actual slot in the machine.")
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
         else:
             print ("I'm sorry, but this slot is currently taken.")
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
 
     def del_record(self):
@@ -195,12 +205,18 @@ class Jukebox(object):
         if (self.inventory[row_num][col_num]):
             self.inventory[row_num][col_num].clear()
             print ("Slot %s%s is now empty. Thank you." % (row_num,col_num))
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
         elif (row_num not in possible_rows or col_num not in range(1,9)):
             print ("I'm sorry, but this is not an actual slot in the machine.")
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
         else:
             print ("I'm sorry, but this slot is already empty.")
+            input("Press any key to return to the main menu.")
+            os.system("clear")
             main_menu = True
 
     def look_up_record(self):
@@ -268,15 +284,20 @@ class Jukebox(object):
             if check_count == 0:
                 print ("No records were found using that string.")
         check_count = 0
+        input("Press any key to return to the main menu.")
+        os.system("clear")
         main_menu = True
 
     def list_all_records(self):
+        os.system("clear")
         for key1, val1 in self.inventory.items():
             for array in val1:
                 column_no = str(val1.index(array) + 1)
                 print("Record " + key1 + column_no + "-----------------------------")
                 array_ordered = array.items()
-                array_ordered.sort()
                 for key2, val2 in array_ordered:
                     print(key2.upper() + ": " + str(val2))
+                print("\n")
+        input("Press any key to return to the main menu.")
+        os.system("clear")
         main_menu = True
