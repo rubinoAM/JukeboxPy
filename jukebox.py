@@ -146,7 +146,7 @@ class Jukebox(object):
         os.system("clear")
         row_sel = input("Please select a row (Type a capital letter from A to J): ")
         col_sel = int(input("Please select a column (Type a number from 1 to 8): "))
-        side_sel = input("Which side do you want to play? The A-Side or B-Side? (Type A or B): ")
+        side_sel = input("Which side do you want to play? The A-side or B-side? (Type A or B): ")
         record_sel = self.inventory[row_sel][(col_sel - 1)]
 
         if side_sel == "A":
@@ -164,7 +164,20 @@ class Jukebox(object):
         col_num = int(input("Please select a column (Type a number from 1 to 8): "))
         possible_rows = ["A","B","C","D","E","F","G","H","I","J"]
 
-        if (not self.inventory[row_num][col_num]):
+        if (not self.inventory[row_num][col_num-1]):
+            artist_inp = input("Please enter the name of the artist: ")
+            aside_inp = input("Please enter the title of the song on the record's A-side: ")
+            bside_inp = input("Please enter the title of the song on the record's B-side: ")
+            year_inp = int(input("Please enter the year of the record's release: "))
+            genre_inp = input("Please enter the genre of the record: ")
+
+            self.inventory[row_num][col_num-1]['artist'] = artist_inp
+            self.inventory[row_num][col_num-1]['aside'] = aside_inp
+            self.inventory[row_num][col_num-1]['bside'] = bside_inp
+            self.inventory[row_num][col_num-1]['year'] = year_inp
+            self.inventory[row_num][col_num-1]['genre'] = genre_inp
+
+            print ("%s / %s by %s has been added to slot %s%s. Thank you" % (aside_inp,bside_inp,artist_inp,row_num,col_num))
             main_menu = True
         elif (row_num not in possible_rows or col_num not in range(1,9)):
             print ("I'm sorry, but this is not an actual slot in the machine.")
