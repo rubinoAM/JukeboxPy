@@ -5,5 +5,7 @@ import os
 mom_and_pops_jukebox = Jukebox()
 mom_and_pops_jukebox.initialize_box()
 
+mom_and_pops_jukebox.start_up()
+
 if (main_menu):
     mom_and_pops_jukebox.start_up()
