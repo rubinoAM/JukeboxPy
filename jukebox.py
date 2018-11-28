@@ -202,13 +202,13 @@ class Jukebox(object):
         col_num = int(input("Please select a column (Type a number from 1 to 8): "))
         possible_rows = ["A","B","C","D","E","F","G","H","I","J"]
 
-        if (self.inventory[row_num][col_num]):
-            self.inventory[row_num][col_num].clear()
+        if (self.inventory[row_num][col_num-1]):
+            self.inventory[row_num][col_num-1].clear()
             print ("Slot %s%s is now empty. Thank you." % (row_num,col_num))
             input("Press any key to return to the main menu.")
             os.system("clear")
             main_menu = True
-        elif (row_num not in possible_rows or col_num not in range(1,9)):
+        elif (row_num not in possible_rows or col_num > 8):
             print ("I'm sorry, but this is not an actual slot in the machine.")
             input("Press any key to return to the main menu.")
             os.system("clear")
